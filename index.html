@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency-converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <h1>Currency Converter</h1>
+        <p>Live exchange rates, market view, history, and settings</p>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="converter">Converter</button>
+        <button class="tab-btn" data-tab="market">Market</button>
+        <button class="tab-btn" data-tab="history">History</button>
+        <button class="tab-btn" data-tab="settings">Settings</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <section id="converter" class="section active">
+          <div class="converter">
+            <div class="field">
+              <label>Amount</label>
+              <input type="number" id="amount" value="1" min="0" />
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label>From</label>
+                <select id="fromCurrency">
+                  <option>USD</option>
+                  <option>INR</option>
+                  <option>EUR</option>
+                  <option>GBP</option>
+                  <option>JPY</option>
+                  <option>AED</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>To</label>
+                <select id="toCurrency">
+                  <option>INR</option>
+                  <option>USD</option>
+                  <option>EUR</option>
+                  <option>GBP</option>
+                  <option>JPY</option>
+                  <option>AED</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="swap">
+              <button onclick="swapCurrencies()">Swap</button>
+            </div>
+
+            <button class="primary-btn" onclick="convertCurrency()">Convert</button>
+
+            <div class="result-box">
+              <h2>Converted Value</h2>
+              <div class="result" id="result">--</div>
+              <div class="small" id="rateInfo">Enter amount and select currencies</div>
+            </div>
+
+            <div class="footer-note" id="lastUpdated"></div>
+          </div>
+        </section>
+
+        <section id="market" class="section">
+          <h2 style="margin-bottom: 16px;">Market</h2>
+          <div class="list" id="marketList">
+            <div class="list-item"><span>USD → INR</span><span>Loading...</span></div>
+            <div class="list-item"><span>EUR → INR</span><span>Loading...</span></div>
+            <div class="list-item"><span>GBP → INR</span><span>Loading...</span></div>
+            <div class="list-item"><span>JPY → INR</span><span>Loading...</span></div>
+          </div>
+        </section>
+
+        <section id="history" class="section">
+          <h2 style="margin-bottom: 16px;">History</h2>
+          <div class="history-input">
+            <div class="field">
+              <label>Select Date</label>
+              <input type="date" id="historyDate" />
+            </div>
+            <button class="primary-btn" onclick="loadHistory()">Load History</button>
+          </div>
+          <div class="result-box">
+            <h2>Historical Rate</h2>
+            <div class="result" id="historyResult">--</div>
+            <div class="small" id="historyInfo">Choose a date to see past rates</div>
+          </div>
+        </section>
+
+        <section id="settings" class="section">
+          <h2 style="margin-bottom: 16px;">Settings</h2>
+          <div class="setting-item">
+            <span>Auto refresh</span>
+            <div class="toggle active" id="autoRefreshToggle" onclick="toggleSetting(this)"></div>
+          </div>
+          <div class="setting-item">
+            <span>Dark mode</span>
+            <div class="toggle active" id="darkModeToggle" onclick="toggleSetting(this)"></div>
+          </div>
+          <div class="setting-item">
+            <span>Show market panel</span>
+            <div class="toggle active" id="marketToggle" onclick="toggleSetting(this)"></div>
+          </div>
+          <p class="footer-note">
+            Settings are visual only in this demo, but you can connect them to localStorage easily.
+          </p>
+        </section>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-bottom: 14px;">Quick Rates</h2>
+        <div class="list" id="quickRates">
+          <div class="list-item"><span>USD</span><span>--</span></div>
+          <div class="list-item"><span>EUR</span><span>--</span></div>
+          <div class="list-item"><span>GBP</span><span>--</span></div>
+          <div class="list-item"><span>INR</span><span>--</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="currency.js"></script>
+</body>
+</html>
